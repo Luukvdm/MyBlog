@@ -10,8 +10,8 @@
       <h1>Home</h1>
       <ul>
       <template v-for="post in posts">
-        <li v-bind:key="post.name">
-          <router-link :to="post.href">{{ post.name }}</router-link>
+        <li v-bind:key="post.id">
+          <router-link v-bind:to="'posts/' + post.id">{{ post.title }}</router-link>
         </li>
       </template>
       </ul>
@@ -30,28 +30,15 @@
   </div>
 </template>
 <script>
-import Vue from 'vue'
+import bPosts from "@/assets/posts.json"
 
 export default {
   name: 'Home',
   data() {
     return {
-      posts: []
+      posts: bPosts
     };
   },
-  mounted() {
-    const ComponentContext = require.context('./posts', true, /\.vue$/i, 'lazy');
-    ComponentContext.keys().forEach((componentFilePath) => {
-      const componentName = componentFilePath.split('/').pop().split('.')[0];
-      let myPost = {
-        name: componentName,
-        href: "posts/" + componentName,
-      }
-      this.posts.push(myPost)
-
-      Vue.component(componentName, () => ComponentContext(componentFilePath));
-    });
-  }
 };
 </script>
 <style>
