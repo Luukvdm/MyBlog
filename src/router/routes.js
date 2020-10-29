@@ -1,8 +1,8 @@
-import DefaultView from '../components/defaultView.vue'
+import defaultView from "../components/defaultView.vue";
 
-import Home from '../components/views/home.vue'
-import About from '../components/views/about.vue'
-import BlogPost from '../components/views/blogPost.vue'
+import home from "../components/views/home.vue";
+import about from "../components/views/about.vue";
+import blogPost from "../components/views/blogPost.vue";
 
 // route level code-splitting
 // this generates a separate chunk (about.[hash].js) for this route
@@ -11,27 +11,27 @@ import BlogPost from '../components/views/blogPost.vue'
 
 const routes = [
   {
-    path: '/',
-    component: DefaultView,
+    path: "/",
+    component: defaultView,
     children: [
       {
-        path: 'home',
-        alias: '',
-        name: 'Home',
-        component: Home,
+        path: "home",
+        alias: "",
+        name: "Home",
+        component: home
       },
       {
-        path: 'about',
-        name: 'About',
-        component: About,
+        path: "about",
+        name: "About",
+        component: about
       },
       {
-        path: 'posts/:id',
-        name: 'Blog Posts',
-        component: BlogPost
+        path: "posts/:id",
+        name: "Blog Posts",
+        component: blogPost
       }
     ]
   }
-]
+];
 
-export default routes
+export default routes;

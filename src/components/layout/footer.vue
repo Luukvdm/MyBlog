@@ -6,7 +6,8 @@
         href="https://www.gnu.org/licenses/gpl-3.0.en.html"
         target="_blank"
         rel="noopener"
-      >GPL License</a>
+        >GPL License</a
+      >
       <br />
       Copyright &copy; 2020-{{ currentyear }} Luuks Blog
     </div>
@@ -15,10 +16,10 @@
 
 <script>
 export default {
-  data: function () {
+  data: function() {
     return {
       currentyear: new Date().getFullYear()
-    }
+    };
   }
 };
 </script>

@@ -19,10 +19,8 @@
 <script>
 // import { mapGetters, mapActions } from "vuex";
 export default {
-  computed: {
-  },
-  methods: {
-  }
+  computed: {},
+  methods: {}
 };
 </script>
 
