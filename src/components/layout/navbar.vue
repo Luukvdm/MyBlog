@@ -9,6 +9,7 @@
       <nav>
         <div class="nav-content">
           <router-link id="nav-home" to="/">Home</router-link>
+          <router-link id="nav-posts" to="/">Posts</router-link>
           <router-link id="nav-about" to="/about">About</router-link>
         </div>
       </nav>

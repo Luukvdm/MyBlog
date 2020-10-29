@@ -1,47 +1,48 @@
 <template>
   <div class="blog-post-wrapper">
     <article>
-      <h1>{{ this.post.title }}</h1>
-      <span>{{ this.post.publish_date }}</span>
-      <div v-html="compiledHtml">{{ this.content }}</div>
+      <h1>{{ post.title }}</h1>
+      <span>{{ post.publish_date }}</span>
+      <div v-html="rawHtml"></div>
     </article>
   </div>
 </template>
 <script>
-import posts from '@/assets/posts.json'
-import axios from "axios"
+import posts from "@/assets/posts.json";
+import axios from "axios";
 
 export default {
-  name: "SomeBlogPost",
   data() {
     return {
       post: "",
-      content: ""
-    }
+      rawHtml: ""
+    };
   },
   created() {
-    this.loadFile()
+    this.loadFile();
   },
   computed: {
     compiledHtml: function() {
-      return this.content
+      return this.content;
     }
   },
   methods: {
     loadFile() {
-        this.post = posts.find(p => p.id = this.$route.params.id)
+      this.post = posts.find(p => (p.id = this.$route.params.id));
       axios({
         method: "get",
         url: "/static/" + this.post.content
-      }).then(result => {
-        this.content = result.data
-      }).catch(error => {
-        console.error("Error getting post content")
-        console.error(error)
       })
+        .then(result => {
+          this.rawHtml = result.data;
+        })
+        .catch(error => {
+          console.error("Error getting post content");
+          console.error(error);
+        });
     }
   }
-}
+};
 </script>
 <style>
 .blog-post-wrapper {

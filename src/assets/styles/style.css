@@ -120,6 +120,21 @@ input, textarea, select {
   overflow: hidden;
 }
 
+.curve-content {
+  height: 100%;
+  width: 100%;
+}
+
+.curve-path-main {
+  fill: var(--main-color);
+  stroke: none;
+}
+
+.curve-path-secondary {
+  fill: var(--dark-color);
+  stroke: none;
+}
+
 .fieldset {
   margin-bottom: 14px;
   width: 100%;
