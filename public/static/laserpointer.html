@@ -1,0 +1,57 @@
+<h2>Introduction</h2>
+
+<p>For my cuber security (security engineering) minor I need to create a application that needs security.
+The application is going to run on a virtual server in our schools vmware vSphere environment.
+During the semester there will be multiple red vs blue team events
+where the applications that the security engineers developed will be tested.</p>
+
+<p>The application needs at least:
+- Internet connectivity
+- Database
+- Authentication</p>
+
+<h2>My Idea</h2>
+
+<p>I recently rooted my Android phone and installed <a href="https://termux.com/">Termux</a>. Termux is a terminal emulator for Android.
+Termux is especially useful for rooted phones because you get access to all your phones features,
+and Termux helps with making use of those features.<br/>
+One of the ways that Termux does this is by maintaining a <a href="https://github.com/termux/termux-root-packages">software repository</a> with useful software for rooted users.
+In this repository you can find cool packages like termshark, openvpn and htop.
+But one of the packages that I found especially interesting was <a href="https://www.aircrack-ng.org/">aircrack-ng</a>.</p>
+
+<p>During an earlier semester we were learning about ethical hacking and red teaming and used
+aircrack-ng for the wireless hacking topic. I found the software very cool but using it was
+annoying because I was using it from a Kali Linux VM and it only worked when I passed
+a USB WiFi adapter to the VM that supports monitor mode.<br/>
+Having aircrack on your phone could make this process allot easier for a red teamer.
+The only problem is that a phone can&rsquo;t really crack the password.</p>
+
+<p>Thats why I wanted to create a web front-end for hash crack software like <a href="https://hashcat.net/hashcat/">Hashcat</a>.
+It would not only make it easy to send passwords that need checking to a more powerful machine
+but could also help red teams in working together.</p>
+
+<h3>LaserPointer</h3>
+
+<p>So my application is going to be a web front-end for cracking hashes.</p>
+
+<p>The application has these goals:</p>
+
+<p><strong>Must haves</strong><br>
+- Crack a set of hashes<br>
+- Get the result of the cracking attempt<br>
+- Be usable from a web UI</p>
+
+<p><strong>Should haves</strong><br>
+- Be usable as an API<br>
+- Usable for teams<br>
+- Upload custom word lists<br>
+- Using the application as a team<br>
+- Crack hashes with Hashcat</p>
+
+<p><strong>Could haves</strong><br>
+- Have a external client for the hash cracking<br>
+- Support multiple cracking clients<br>
+- Support other hash cracking software like John the Ripper</p>
+
+<p><strong>Would haves</strong><br>
+- Benchmark cracking clients to load balance jobs</p>

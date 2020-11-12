@@ -9,7 +9,16 @@
       <nav>
         <div class="nav-content">
           <router-link id="nav-home" to="/">Home</router-link>
-          <router-link id="nav-posts" to="/">Posts</router-link>
+          <div class="dropdown">
+            <a>Posts</a>
+            <div class="dropdown-content">
+              <template v-for="(cat, key) in cats" v-bind:key="key">
+                <router-link class="dropdown-link" :to="'/posts/cat/' + cat">{{
+                  cat
+                }}</router-link>
+              </template>
+            </div>
+          </div>
           <router-link id="nav-about" to="/about">About</router-link>
         </div>
       </nav>
@@ -18,10 +27,28 @@
 </template>
 
 <script>
+import bPosts from "@/assets/posts.json";
+
 // import { mapGetters, mapActions } from "vuex";
 export default {
+  data() {
+    return {
+      cats: []
+    };
+  },
+  mounted() {
+    bPosts.forEach(p => {
+      p.categories.forEach(cat => {
+        if (!this.cats.includes(cat)) {
+          this.cats.push(cat);
+        }
+      });
+    });
+  },
   computed: {},
-  methods: {}
+  methods: {
+    getCats() {}
+  }
 };
 </script>
 

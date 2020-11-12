@@ -28,9 +28,10 @@ h1 {
 }
 
 img {
-    width: 100%;
+    /* width: 100%; */
     max-width: 100%;
     position: relative;
+		border: 1px solid var(--dark-color);
 }
 
 button, a {
@@ -62,6 +63,34 @@ form {
 
 input, textarea, select {
   width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table, td, th {
+	border: 1px solid var(--dark-color);
+}
+
+table tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+table tr:hover {
+	background-color: #ddd;
+}
+
+table td, table th {
+	padding: 5px;
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: var(--main-color);
+  color: var(--dark-color);
 }
 
 #app {
@@ -116,6 +145,7 @@ input, textarea, select {
 }
 
 .curve-container {
+	background-color: var(--secondary-color);
   height: 150px;
   overflow: hidden;
 }

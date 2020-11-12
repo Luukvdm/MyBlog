@@ -1,0 +1,152 @@
+<h2>1. Goals</h2>
+
+<p>Logging is very important for security in my application.
+It can help with detecting attacks, debugging and examining what
+is going on in the application.
+So I want to log not only errors but also events that happen within
+the application.</p>
+
+<h2>2. Design</h2>
+
+<h3>2.1 What To Log</h3>
+
+<p>I want to log the fellowing events:
+- Creation of a job
+- Job status change
+- Sending of SSE messages
+- Queries/ commands
+- Auth events
+- Exceptions</p>
+
+<p>I also want to pay attention to not log any private information like the passwords of users.</p>
+
+<h3>2.2 Logging Technology</h3>
+
+<p>My project is build with the Asp.Net Core framework. I want to use
+the <a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging/5.0.0-rc.2.20475.5">Microsoft.Extensions.Logging</a> interface for logging.
+This means using the provided ILogger interface provided by the Microsoft package. The package still needs a provider like
+<a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console/5.0.0-rc.2.20475.5">this console provider</a>.</p>
+
+<p>I want to use the ILogger abstraction with the <a href="https://serilog.net/">Serilog</a> provider. I want to use Serlig because its easy
+to use and has a nice way of customizing the output format.</p>
+
+<h3>2.3 Logging Format</h3>
+
+<p>Serilog extends the .Net string format so the output format can be changed without having to change allot of code.<br/>
+The format that I want to use is going to look something like this:
+<code>
+00:00:00 [&lt;level&gt;] &lt;message&gt;
+</code>
+If I later figure out that a different format like Json objects are more useful for me or the blue team, than I only have to change a
+single configuration file.</p>
+
+<h2>3. Implementation Examples</h2>
+
+<p>The ILogger interface has multiple levels for logging messages. This helps with finding the most important logging messages that need
+attention the quickest.</p>
+
+<p><strong>The ILogger interface:</strong>
+<pre><code>
+  /// &lt;summary&gt;Defines logging severity levels.&lt;/summary&gt;
+  public enum LogLevel
+  {
+    /// &lt;summary&gt;
+    /// Logs that contain the most detailed messages. These messages may contain sensitive application data.
+    /// These messages are disabled by default and should never be enabled in a production environment.
+    /// &lt;/summary&gt;
+    Trace,
+    /// &lt;summary&gt;
+    /// Logs that are used for interactive investigation during development.  These logs should primarily contain
+    /// information useful for debugging and have no long-term value.
+    /// &lt;/summary&gt;
+    Debug,
+    /// &lt;summary&gt;
+    /// Logs that track the general flow of the application. These logs should have long-term value.
+    /// &lt;/summary&gt;
+    Information,
+    /// &lt;summary&gt;
+    /// Logs that highlight an abnormal or unexpected event in the application flow, but do not otherwise cause the
+    /// application execution to stop.
+    /// &lt;/summary&gt;
+    Warning,
+    /// &lt;summary&gt;
+    /// Logs that highlight when the current flow of execution is stopped due to a failure. These should indicate a
+    /// failure in the current activity, not an application-wide failure.
+    /// &lt;/summary&gt;
+    Error,
+    /// &lt;summary&gt;
+    /// Logs that describe an unrecoverable application or system crash, or a catastrophic failure that requires
+    /// immediate attention.
+    /// &lt;/summary&gt;
+    Critical,
+    /// &lt;summary&gt;
+    /// Not used for writing log messages. Specifies that a logging category should not write any messages.
+    /// &lt;/summary&gt;
+    None,
+  }
+</code></pre></p>
+
+<p>Because I&rsquo;m using Mediatr with a CQRS pattern in my application, its very easy to log all queries and commands.<br/>
+
+<strong>Logging behaveiour for commands and queries:</strong>
+<pre><code>
+public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest>
+{
+    private readonly ILogger <em>logger;
+    private readonly ICurrentUserService </em>currentUserService;
+    private readonly GlobalSettings _globalSettings;</p>
+
+    public LoggingBehaviour(ILogger&lt;TRequest&gt; logger, ICurrentUserService currentUserService, GlobalSettings globalSettings){...}
+
+    public Task Process(TRequest request, CancellationToken cancellationToken)
+    {
+        string requestName = typeof(TRequest).Name;
+        string userId = _currentUserService.UserId ?? string.Empty;
+        string userName = string.Empty;
+
+        if (!string.IsNullOrEmpty(userId))
+        {
+            userName = _currentUserService.UserEmail;
+        }
+
+        _logger.LogInformation("{ProjectName} Request: {Name} {@UserId} {@UserName} {@Request}",
+            _globalSettings.ProjectName, requestName, userId, userName, request);
+
+        return Task.CompletedTask;
+    }
+}
+</code></pre>
+
+<p>Something similar can be achieved for logging exceptions. By creating a different middleware for catching exceptions and logging
+them before handling them gracefully with a MVC filter.</p>
+
+<pre><code>
+public class UnhandledExceptionBehaviour&lt;TRequest, TResponse> : IPipelineBehavior&lt;TRequest, TResponse>
+{
+    private readonly ILogger<TRequest> <em>logger;
+    private readonly GlobalSettings </em>globalSettings;</p>
+
+    public UnhandledExceptionBehaviour(ILogger&lt;TRequest&gt; logger, GlobalSettings globalSettings){...}
+
+    public async Task&lt;TResponse&gt; Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate&lt;TResponse&gt; next)
+    {
+        try
+        {
+            return await next();
+        }
+        catch (Exception ex)
+        {
+            string requestName = typeof(TRequest).Name;
+
+            _logger.LogError(ex, "{ProjectName} Request: Unhandled Exception for Request {Name} {@Request}", 
+                _globalSettings.ProjectName, requestName, request);
+
+            throw;
+        }
+    }
+}
+</code></pre>
+
+<p>For other events like domain events I need to call the log function in every event. This is necessary because every event is different.
+And writing a behaviour for every Mediatr notification can&rsquo;t be done without missing out on allot of information about the event that
+otherwise could be used to log more useful information.</p>

@@ -1,0 +1,255 @@
+<h2>1. About</h2>
+
+<p>In this document I describe the risk of possible threats. And describe what parts of the data in and around the
+system should be treated.</p>
+
+<h2>2. CIAP</h2>
+
+<p>I&rsquo;m going to create a matrix for each type of data.
+In these matrices I&rsquo;m going to be assigning a value as described in the table below.</p>
+
+<table>
+<thead>
+<tr>
+<th> Confidentiality </th>
+<th> Integrity   </th>
+<th> Availability  </th>
+<th> Privacy          </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> Public          </td>
+<td> Unimportant </td>
+<td> Not necessary </td>
+<td> Public           </td>
+</tr>
+<tr>
+<td> Internal use    </td>
+<td> Protected   </td>
+<td> Important     </td>
+<td> Personal         </td>
+</tr>
+<tr>
+<td> Confidential    </td>
+<td> High        </td>
+<td> Required      </td>
+<td> Special personal </td>
+</tr>
+<tr>
+<td> Classified      </td>
+<td> Guaranteed  </td>
+<td> Essential     </td>
+<td>                  </td>
+</tr>
+</tbody>
+</table>
+
+
+<h3>2.1 New Job</h3>
+
+<p>When a user creates a new job, he first creates it in the GUI, then sends it to the server.
+The server then needs to store the job until the system is ready to start it.
+So the data has two states in the system, in transport and stored.</p>
+
+<table>
+<thead>
+<tr>
+<th> State        </th>
+<th> Confidentiality </th>
+<th> Integrity  </th>
+<th> Availability  </th>
+<th> Privacy  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> In transport </td>
+<td> Confidential    </td>
+<td> Guaranteed </td>
+<td> Not necessary </td>
+<td> Personal </td>
+</tr>
+<tr>
+<td> Stored       </td>
+<td> Internal use    </td>
+<td> High       </td>
+<td> Important     </td>
+<td> Personal </td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>2.2 Start A Job</h2>
+
+<p>When a job is started it starts in storage and needs to be transfered to the system that executes the job.
+Afterwards the job needs to be transfered back to the system and be stored again.</p>
+
+<table>
+<thead>
+<tr>
+<th> State          </th>
+<th> Confidentiality </th>
+<th> Integrity  </th>
+<th> Availability  </th>
+<th> Privacy  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> In transport   </td>
+<td> Confidential    </td>
+<td> Guaranteed </td>
+<td> Not necessary </td>
+<td> Personal </td>
+</tr>
+<tr>
+<td> Stored         </td>
+<td> Confidential    </td>
+<td> Protected  </td>
+<td> Not necessary </td>
+<td> Personal </td>
+</tr>
+</tbody>
+</table>
+
+
+<h3>2.3 Accounts</h3>
+
+<p>If a user wants to use the system, he needs an account.
+Accounts need to be stored, editable and certain data needs to be transported at times.</p>
+
+<table>
+<thead>
+<tr>
+<th> State     </th>
+<th> Confidentiality </th>
+<th> Integrity  </th>
+<th> Availability  </th>
+<th> Privacy  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> Transport </td>
+<td> Classified      </td>
+<td> Guaranteed </td>
+<td> Required      </td>
+<td> Personal </td>
+</tr>
+<tr>
+<td> Editing   </td>
+<td> Classified      </td>
+<td> Guaranteed </td>
+<td> Required      </td>
+<td> Personal </td>
+</tr>
+<tr>
+<td> Stored    </td>
+<td> Confidential    </td>
+<td> High       </td>
+<td> Required      </td>
+<td> Personal </td>
+</tr>
+</tbody>
+</table>
+
+
+<h3>2.4 Word Lists</h3>
+
+<p>Users can create/ upload word lists to use in the jobs.</p>
+
+<table>
+<thead>
+<tr>
+<th> State     </th>
+<th> Confidentiality </th>
+<th> Integrity  </th>
+<th> Availability  </th>
+<th> Privacy  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> Transport </td>
+<td> Unimportant     </td>
+<td> Protected  </td>
+<td> Not necessary </td>
+<td> Public   </td>
+</tr>
+<tr>
+<td> Editing   </td>
+<td> Unimportant     </td>
+<td> Protected  </td>
+<td> Not necessary </td>
+<td> Public   </td>
+</tr>
+<tr>
+<td> Stored    </td>
+<td> Unimportant     </td>
+<td> Protected  </td>
+<td> Not necessary </td>
+<td> Public   </td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>3. Threats</h2>
+
+<p>To figure out what the biggest threat is, we can look at the impact and the risk.</p>
+
+<table>
+<thead>
+<tr>
+<th> Threat            </th>
+<th> Impact description                                </th>
+<th> Impact<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> </th>
+<th> Risk[^1] </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> Data breach       </td>
+<td> Abuse of sensitive data, reputation damage, fines </td>
+<td> High       </td>
+<td> Medium   </td>
+</tr>
+<tr>
+<td> DDoS              </td>
+<td> Downtime, financial damage                        </td>
+<td> Medium     </td>
+<td> Low      </td>
+</tr>
+<tr>
+<td> State actors      </td>
+<td> Human safety, reputation damage, physical damage  </td>
+<td> High       </td>
+<td> Low      </td>
+</tr>
+<tr>
+<td> Malware infection </td>
+<td> Loss of data, downtime, financial damage          </td>
+<td> Medium     </td>
+<td> Low      </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Using the formula <code>Risk * Impact</code> we can determine what security measures to prioritize.</p>
+
+<p><strong>Ranked threats</strong><br>
+1. Data breach<br>
+2. State actors<br>
+3. DDos<br>
+4. Malware infection</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+Possible values: Low - Medium - High<a href="#fnref:1" rev="footnote">&#8617;</a></li>
+</ol>
+</div>
+

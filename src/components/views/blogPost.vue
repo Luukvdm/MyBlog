@@ -1,6 +1,6 @@
 <template>
   <div class="blog-post-wrapper">
-    <article>
+    <article class="content">
       <h1>{{ post.title }}</h1>
       <span>{{ post.publish_date }}</span>
       <div v-html="rawHtml"></div>
@@ -28,7 +28,9 @@ export default {
   },
   methods: {
     loadFile() {
-      this.post = posts.find(p => (p.id = this.$route.params.id));
+      console.log(posts);
+      this.post = posts.find(p => p.id == this.$route.params.id);
+      console.log(this.post);
       axios({
         method: "get",
         url: "/static/" + this.post.content
