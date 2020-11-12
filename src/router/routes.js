@@ -19,25 +19,25 @@ const routes = [
         path: "home",
         alias: "",
         name: "Home",
-        component: home
+        component: home,
       },
       {
         path: "about",
         name: "About",
-        component: about
+        component: about,
       },
       {
         path: "posts/:id",
         name: "Blog Posts",
-        component: blogPost
+        component: blogPost,
       },
       {
         path: "posts/cat/:cat",
         name: "Blog Post Categories",
-        component: blogPostCat
-      }
-    ]
-  }
+        component: blogPostCat,
+      },
+    ],
+  },
 ];
 
 export default routes;

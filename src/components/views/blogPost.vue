@@ -15,35 +15,35 @@ export default {
   data() {
     return {
       post: "",
-      rawHtml: ""
+      rawHtml: "",
     };
   },
   created() {
     this.loadFile();
   },
   computed: {
-    compiledHtml: function() {
+    compiledHtml: function () {
       return this.content;
-    }
+    },
   },
   methods: {
     loadFile() {
       console.log(posts);
-      this.post = posts.find(p => p.id == this.$route.params.id);
+      this.post = posts.find((p) => p.id == this.$route.params.id);
       console.log(this.post);
       axios({
         method: "get",
-        url: "/static/" + this.post.content
+        url: "/static/" + this.post.content,
       })
-        .then(result => {
+        .then((result) => {
           this.rawHtml = result.data;
         })
-        .catch(error => {
+        .catch((error) => {
           console.error("Error getting post content");
           console.error(error);
         });
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

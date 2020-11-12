@@ -2,9 +2,7 @@
   <header>
     <div class="content">
       <div class="logo">
-        <router-link class="site-title" to="/">
-          Luuks Blog
-        </router-link>
+        <router-link class="site-title" to="/"> Luuks Blog </router-link>
       </div>
       <nav>
         <div class="nav-content">
@@ -33,12 +31,12 @@ import bPosts from "@/assets/posts.json";
 export default {
   data() {
     return {
-      cats: []
+      cats: [],
     };
   },
   mounted() {
-    bPosts.forEach(p => {
-      p.categories.forEach(cat => {
+    bPosts.forEach((p) => {
+      p.categories.forEach((cat) => {
         if (!this.cats.includes(cat)) {
           this.cats.push(cat);
         }
@@ -47,8 +45,8 @@ export default {
   },
   computed: {},
   methods: {
-    getCats() {}
-  }
+    getCats() {},
+  },
 };
 </script>
 

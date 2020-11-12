@@ -16,11 +16,11 @@
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
-      currentyear: new Date().getFullYear()
+      currentyear: new Date().getFullYear(),
     };
-  }
+  },
 };
 </script>
 

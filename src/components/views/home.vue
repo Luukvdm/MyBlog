@@ -73,7 +73,7 @@ import bPosts from "@/assets/posts.json";
 export default {
   data() {
     return {
-      posts: bPosts
+      posts: bPosts,
     };
   },
   methods: {
@@ -82,8 +82,8 @@ export default {
         (a, b) => Date.parse(b.publish_date) - Date.parse(a.publish_date)
       );
       this.posts = sPosts.slice(0, 5);
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

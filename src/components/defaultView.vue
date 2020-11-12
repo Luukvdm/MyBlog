@@ -46,9 +46,9 @@ export default {
   methods: {},
   data() {
     return {
-      layout: "div"
+      layout: "div",
     };
-  }
+  },
 };
 </script>
 

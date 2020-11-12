@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       cat: this.$route.params.cat,
-      posts: []
+      posts: [],
     };
   },
   beforeRouteUpdate(to) {
@@ -30,13 +30,13 @@ export default {
   methods: {
     setCats() {
       this.posts = [];
-      bPosts.forEach(p => {
+      bPosts.forEach((p) => {
         if (p.categories.includes(this.cat)) {
           this.posts.push(p);
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style>
