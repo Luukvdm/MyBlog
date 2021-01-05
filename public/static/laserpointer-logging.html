@@ -6,6 +6,10 @@ is going on in the application.
 So I want to log not only errors but also events that happen within
 the application.</p>
 
+<p>I also want the logs that get saved to a file to have a different format
+then the logs in the console.
+Because logs that I understand and logs that a machine understands are very different.</p>
+
 <h2>2. Design</h2>
 
 <h3>2.1 What To Log</h3>
@@ -34,7 +38,7 @@ to use and has a nice way of customizing the output format.</p>
 
 <p>Serilog extends the .Net string format so the output format can be changed without having to change allot of code.<br/>
 The format that I want to use is going to look something like this:
-<code>
+<code class="plaintext">
 00:00:00 [&lt;level&gt;] &lt;message&gt;
 </code>
 If I later figure out that a different format like Json objects are more useful for me or the blue team, than I only have to change a
@@ -46,7 +50,7 @@ single configuration file.</p>
 attention the quickest.</p>
 
 <p><strong>The ILogger interface:</strong>
-<pre><code>
+<pre><code class="csharp">
   /// &lt;summary&gt;Defines logging severity levels.&lt;/summary&gt;
   public enum LogLevel
   {

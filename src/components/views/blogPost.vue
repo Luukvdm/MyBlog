@@ -28,9 +28,7 @@ export default {
   },
   methods: {
     loadFile() {
-      console.log(posts);
       this.post = posts.find((p) => p.id == this.$route.params.id);
-      console.log(this.post);
       axios({
         method: "get",
         url: "/static/" + this.post.content,
