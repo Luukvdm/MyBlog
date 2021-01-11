@@ -1,56 +1,92 @@
 [
   {
     "id": "1",
-    "title": "Semester Leerplan",
-    "publish_date": "15/09/2020",
-    "content": "learning-plan.html",
+    "title": "LaserPointer: Description",
+    "publish_date": "17/10/2020",
+    "content": "laserpointer.md",
     "categories": [
-      "School_Related"
+      "LaserPointer"
     ]
   },
   {
     "id": "2",
-    "title": "LaserPointer: Description",
-    "publish_date": "17/10/2020",
-    "content": "laserpointer.html",
+    "title": "LaserPointer: Logging",
+    "publish_date": "26/10/2020",
+    "content": "laserpointer_logging.md",
     "categories": [
       "LaserPointer"
     ]
   },
   {
     "id": "3",
-    "title": "LaserPointer: Risk Analysis",
-    "publish_date": "19/10/2020",
-    "content": "risk-analysis.html",
+    "title": "LaserPointer: Input Validation",
+    "publish_date": "26/11/2020",
+    "content": "laserpointer_input_validation.md",
     "categories": [
       "LaserPointer"
     ]
   },
   {
     "id": "4",
-    "title": "LaserPointer: Threat Analysis",
-    "publish_date": "26/10/2020",
-    "content": "threat-analysis.html",
+    "title": "LaserPointer: Continuous Deployment",
+    "publish_date": "24/10/2020",
+    "content": "jenkins.md",
     "categories": [
       "LaserPointer"
     ]
   },
   {
     "id": "5",
-    "title": "LaserPointer: Logging",
-    "publish_date": "24/10/2020",
-    "content": "laserpointer-logging.html",
+    "title": "Semester Leerplan",
+    "publish_date": "15/09/2020",
+    "content": "learning-plan.md",
     "categories": [
-      "LaserPointer"
+      "School_Related"
     ]
   },
   {
     "id": "6",
     "title": "Crypto: RSA",
     "publish_date": "02/11/2020",
-    "content": "rsa.html",
+    "content": "rsa.md",
     "categories": [
       "Learning"
+    ]
+  },
+  {
+    "id": "7",
+    "title": "Research Plan: Database",
+    "publish_date": "07/01/2021",
+    "content": "research_plan_db.md",
+    "categories": [
+      "School_Related"
+    ]
+  },
+  {
+    "id": "8",
+    "title": "HTES AAS: Add a Secure Brain To Your Factory",
+    "publish_date": "05/01/2021",
+    "content": "htes_aas_article.md",
+    "categories": [
+      "HTES_AAS"
+    ]
+  },
+  {
+    "id": "9",
+    "title": "LaserPointer: Risk Analysis",
+    "publish_date": "19/10/2020",
+    "content": "laserpointer_risk_analysis.md",
+    "categories": [
+      "LaserPointer"
+    ]
+  },
+  {
+    "id": "10",
+    "title": "LaserPointer: Threat Analysis",
+    "publish_date": "26/10/2020",
+    "content": "laserpointer_threat_analysis.md",
+    "categories": [
+      "LaserPointer"
     ]
   }
 ]

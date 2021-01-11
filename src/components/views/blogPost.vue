@@ -3,44 +3,27 @@
     <article class="content">
       <h1>{{ post.title }}</h1>
       <span>{{ post.publish_date }}</span>
-      <div v-html="rawHtml"></div>
+      <markdown :url="this.contentUrl" />
     </article>
   </div>
 </template>
 <script>
 import posts from "@/assets/posts.json";
-import axios from "axios";
+import markdown from "@/components/views/markdown";
 
 export default {
+  components: {
+    markdown,
+  },
   data() {
     return {
       post: "",
-      rawHtml: "",
+      contentUrl: "",
     };
   },
   created() {
-    this.loadFile();
-  },
-  computed: {
-    compiledHtml: function () {
-      return this.content;
-    },
-  },
-  methods: {
-    loadFile() {
-      this.post = posts.find((p) => p.id == this.$route.params.id);
-      axios({
-        method: "get",
-        url: "/static/" + this.post.content,
-      })
-        .then((result) => {
-          this.rawHtml = result.data;
-        })
-        .catch((error) => {
-          console.error("Error getting post content");
-          console.error(error);
-        });
-    },
+    this.post = posts.find((p) => p.id == this.$route.params.id);
+    this.contentUrl = "/static/" + this.post.content;
   },
 };
 </script>
